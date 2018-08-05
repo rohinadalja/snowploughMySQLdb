@@ -1,0 +1,70 @@
+
+
+.av0 {
+	background-color: #ff794d;
+}
+.av1 {
+	background-color: #80ff80;
+}
+
+
+legend {
+	font-size: 130%
+}
+
+.required:after {
+	content:" *"; 
+	color: #e32;
+	font-weight: bold;
+	display:inline;
+}
+
+h1 {
+	font-family: 'Indie Flower', cursive;
+	font-size: 40px;
+	font-weight: 400;
+}
+
+.title {
+	font-family: 'Indie Flower', cursive;
+	font-size: 48px;
+	font-weight: 400px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+    
+/*
+.c-btn {
+
+}
+
+
+.d-btn {
+
+}
+
+
+.c-input {
+
+}
+
+
+.d-input {
+	
+}
+
+input {
+	
+}
+
+.u-input {
+	
+}
+
+.filter-input {
+	
+}
+
+*/
