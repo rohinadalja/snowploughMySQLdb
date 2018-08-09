@@ -1,0 +1,94 @@
+<h1>Snow-plowing Project Company Database</h1>
+
+<div class="page_nav">
+	<a href="./">Employees</a>
+	<a href="./roads"><strong>Roads</strong></a>
+	<a href="./vehicles">Vehicles</a>
+	<a href="./department">Department</a>
+	<a href="./salary">Salary</a>
+	<a href="./association">Association</a>
+</div>
+
+<h2>Roads</h2>
+
+<!-- SELECT name, length FROM road; -->
+<div id="RoadsTableDiv"></div>
+
+<table class="table table-striped">
+  <legend>Roads Table: </legend>
+  <thead class="thead-dark">
+ 	<tr>
+    	<th>ID</th>
+    	<th>Name</th>
+    	<th>Length (km)</th>
+    </tr>
+    </thead>
+    	{{#if results}}
+    	{{#each results}}
+    <tr>
+    	<td>{{this.id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.length}}</td>
+    </tr>
+    	{{/each}}
+    	{{/if}}
+</table>
+
+</br>
+
+
+<div id="input" class="c-input">
+	<fieldset>
+	<form id="newRoad" action="/insert_roads" method="post">
+		<legend>Add New road to Database</legend>
+		<div>
+			<label for="">Enter new road name: </label>
+			<input type="text" name="road_name" id="road_name" required >
+		</div>
+		<div>
+			<label for="">Road Length (km): </label>
+			<input type="text" name="road_length" id="road_length" required >
+		</div>
+		<br>
+		<input type="submit" id="inputSubmit" value="Add" class="btn btn-success c-btn">	
+	</form>
+	</fieldset>
+</div>
+</br>
+
+<div id="input" class="d-input">
+	<fieldset>
+		<form id="deleteRoad" action="/remove_road_by_id" method="post">
+		<legend>Remove Road from Database</legend>
+		<div>
+			<label for="">Select Road Name: </label>
+			<select name="road_id" id="road_id" required>
+        		{{#if results}}
+       			 	<option value="">Select from list of Roads...</option>
+            	{{#each results}}
+              	 	<option value="{{this.id}}" required>{{this.name}} (Road ID: {{this.id}})</option>
+            	{{/each}}
+       	 		{{/if}}
+      		</select>
+		</div>
+		<br>
+		<input type="submit" id="removeSubmit" value="Delete Road" class="btn btn-danger d-btn">
+	</form>
+	</fieldset>
+</div>
+<br>
+<div id="input" class="d-input">
+	<fieldset>
+		<form id="deleteRoad" action="/remove_road_by_id" method="post">
+		<legend>Remove Road from Database (ADVANCED)</legend>
+		<div>
+			<label for="">Enter VALID Road ID to remove: </label>
+			<input type="text" name="road_id" id="road_id" required >
+		</div>
+		<br>
+		<input type="submit" id="removeSubmit" value="Remove" class="btn btn-danger d-btn">
+	</form>
+	</fieldset>
+</div>
+</br>
+<!-- <script src="road_button.js"></script> -->

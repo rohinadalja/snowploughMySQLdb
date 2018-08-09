@@ -1,0 +1,131 @@
+<h1>Snow-plowing Project Company Database</h1>
+
+<div class="page_nav">
+	<a href="./">Employees</a>
+	<a href="./roads">Roads</a>
+	<a href="./vehicles">Vehicles</a>
+	<a href="./department">Department</a>
+	<a href="./salary">Salary</a>
+	<a href="./association"><strong>Association<strong></a>
+</div>
+
+<h2>Association</h2>
+<div id="AssociationTableDiv"></div>
+
+<!-- department_id, office name -->
+<table class="table table-striped">
+  <legend>Association Table: </legend>
+  <thead class="thead-dark">
+ 	<tr>
+    	<th>Employee ID</th>
+    	<th>Emp. First Name</th>
+    	<th>Emp. Last Name</th>
+    	<th>Assigned to Department</th>
+    </tr>
+    </thead>
+    	{{#if results}}
+    	{{#each results}}
+    <tr>
+    	<td>{{this.employee_id}}</td>
+    	<td>{{this.f_name}}</td>
+        <td>{{this.l_name}}</td>
+        <td>{{this.office_name}} (Dept ID: {{this.department_id}})</td>
+    </tr>
+    	{{/each}}
+    	{{/if}}
+</table>
+
+</br>
+
+<div id="input" class="c-input">
+	<fieldset>
+	<form id="newAssociation" action="/new_association" method="post" onchange="sel1()">
+		<legend>New Association: Associate an employee ID to a department ID here:</legend>
+		<div>
+			<label for="employee_id">Select an employee: </label>
+			<select name="employee_id" id="employee_id" required>
+				{{#if emp_list}}
+				<option value="">Select an employee from here...</option>
+    			{{#each emp_list}}
+        			<option value="{{this.eid}}" required>{{this.l_name}}, {{this.f_name}} (Employee ID: {{this.eid}})</option>
+        		{{/each}}
+        		{{/if}}
+        	</select>
+		</div>
+
+		<br>
+		<div>
+			<label for="department_id">Select a Department Office Name:</label>
+			<select name="department_id" id="department_id1_block" required disabled>
+				{{#if dept_list}}
+				<option value="">Add Selected employee to NEW Department...</option>
+    			{{#each dept_list}}
+        			<option value="{{this.id}}">{{this.office_name}} (Dept ID: {{this.id}})</option>
+        		{{/each}}
+        		{{/if}}
+        	</select>
+		</div>
+		<br>
+
+		<input type="submit" id="inputSubmit" value="Associate employee to department" class="btn btn-success c-btn">	
+	</form>
+	</fieldset>
+</div>
+</br>
+
+<div id="input" class="d-input">
+	<fieldset>
+		<form id="removeAssociation" action="/remove_association" method="post" onchange="sel2()">
+		<legend>Dis-allocate employee from currently linked Department: </legend>
+
+		<div>
+			<label for="employee_id">Select an employee: </label>
+			<select name="employee_id" id="employee_id" required>
+				{{#if emp_list}}
+				<option value="">Select an employee from here...</option>
+    			{{#each emp_list}}
+        			<option value="{{this.eid}}" required>{{this.l_name}}, {{this.f_name}} (Employee ID: {{this.eid}})</option>
+        		{{/each}}
+        		{{/if}}
+        	</select>
+		</div>
+		<br>
+
+		<div>
+			<label for="department_id">Select a Department Office Name:</label>
+			<select name="department_id" id="department_id2_block" required disabled>
+				{{#if dept_list}}
+				<option value="">Add Selected employee to NEW Department...</option>
+    			{{#each dept_list}}
+        			<option value="{{this.id}}">{{this.office_name}} (Dept ID: {{this.id}})</option>
+        		{{/each}}
+        		{{/if}}
+        	</select>
+		</div>
+
+		<br>
+		<input type="submit" id="removeSubmit" value="Remove employee from department" class="btn btn-danger d-btn">
+	</form>
+	</fieldset>
+</div>
+</br>
+
+<script>
+function sel1() {
+	if (this.value == '') {
+		document.getElementById('department_id1_block').disabled = true;
+	} else {
+		document.getElementById('department_id1_block').disabled = false;
+	}
+};
+
+function sel2() {
+	if (this.value == '') {
+		document.getElementById('department_id2_block').disabled = true;
+	} else {
+		document.getElementById('department_id2_block').disabled = false;
+	}
+};		 
+</script>
+
+<!-- <script src="association_button.js"></script> -->

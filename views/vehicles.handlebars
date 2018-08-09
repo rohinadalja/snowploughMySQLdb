@@ -1,0 +1,126 @@
+<h1>Snow-plowing Project Company Database</h1>
+
+<div class="page_nav">
+	<a href="./">Employees</a>
+	<a href="./roads">Roads</a>
+	<a href="./vehicles"><strong>Vehicles</strong></a>
+	<a href="./department">Department</a>
+	<a href="./salary">Salary</a>
+	<a href="./association">Association</a>
+</div>
+
+<h2>Vehicles</h2>
+
+<div id="VehiclesTableDiv"></div>
+
+
+<!-- PLATE NUMBER, CAR TYPE, HOURLY COST ($USD), ROAD ASSIGNED, AVAILABLE FOR USE -->
+<!-- SELECT plate_number, type, hourly_cost, available, road_id_fk FROM vehicle; -->
+
+<table class="table table-striped">
+  <legend>Vehicles Table: </legend>
+  	<thead class="thead-dark">
+ 	<tr>
+	    <th>PLATE NUMBER</th>
+	    <th>CAR TYPE</th>
+	    <th>HOURLY COST ($USD)</th>
+	    <th>ROAD ASSIGNED</th>
+	    <th>AVAILABLE FOR USE</th>
+    </tr>
+	</thead>
+    	{{#if results}}
+    	{{#each results}}
+    <tr>
+    	<td>{{this.plate_number}}</td>
+        <td>{{this.type}}</td>
+        <td>{{this.hourly_cost}}</td>
+        <td>{{this.road_id_fk}}</td>
+        <td class="av{{this.available}}">{{this.available}}</td>
+    </tr>
+    	{{/each}}
+    	{{/if}}
+</table>
+
+
+</br>
+
+<div id="input" class="c-input">
+	<fieldset>
+	<form id="newRoad" action="/insert_vehicles" method="post">
+		<legend>Add New vehicle to database: </legend>
+		<div>
+			<label for="">New vehicle plate number: </label>
+			<input type="text" name="plate_number" id="plate_number" required >
+		</div>
+		<div>
+			<label for="">Car Type: </label>
+			<input type="text" name="car_type" id="car_type" required >
+		</div>
+		<div>
+			<label for="">Hourly Cost: $</label>
+			<input type="text" name="hourly_cost" id="hourly_cost" placeholder="(Default will be $5)">
+		</div>
+		
+		<div>
+			<label for="">Assign to road: </label>
+			<select name="road_id" id="road_id" required>
+        		{{#if roadList}}
+        			<option value="">Select an road from here...</option>
+            	{{#each roadList}}
+             		<option value="{{this.id}}" required>{{this.name}} (Road ID: {{this.id}})</option>
+            	{{/each}}
+        		{{/if}}
+      		</select>
+    	</div>
+
+		<div>
+			<label for="">Availibility: </label>
+			<select name="available" id="available">
+				<option value="">Select a status...</option>
+				<option value="1" selected>Yes - Available for use</option>
+				<option value="0">No - In use</option>
+			</select>
+		</div>
+		<br>
+		<input type="submit" id="inputSubmit" value="Add Vehicle" class="btn btn-success c-btn">
+	</form>
+	</fieldset>
+</div>
+</br>
+
+<div id="input" class="u-input">
+	<fieldset>
+		<form id="updateVehicleAvailibility" action="/update_vehicles" method="post">
+		<legend>UPDATE vehicle availability status</legend>
+
+
+		<div>
+			<label for="">Select Vehicle: </label>
+			<select name="plate_number_update" id="plate_number_update" required>
+        		{{#if results}}
+        			<option value="">Select a vehicle plate # from here...</option>
+            	{{#each results}}
+             		<option value="{{this.plate_number}}" required>{{this.plate_number}} (Type: {{this.type}})</option>
+            	{{/each}}
+        		{{/if}}
+      		</select>
+    	</div>
+
+		<br>
+
+		<div>
+			<label for="available">Change Status: </label>
+			<select name="available_update" id="available_update" required>
+				<option value="">Select a status...</option>
+				<option value="1">Yes - Available for use</option>
+				<option value="0">No - In use</option>
+			</select>
+		</div>
+		</br>
+		<input type="submit" id="updateSubmit" value="Update Availibility" class="btn btn-primary d-btn">
+	</form>
+	</fieldset>
+</div>
+</br>
+
+<!-- <script src="vehicles_button.js"></script> -->

@@ -1,0 +1,63 @@
+<h1>Snow-plowing Project Company Database</h1>
+
+<div class="page_nav">
+	<a href="./">Employees</a>
+	<a href="./roads">Roads</a>
+	<a href="./vehicles">Vehicles</a>
+	<a href="./department"><strong>Department</strong></a>
+	<a href="./salary">Salary</a>
+	<a href="./association">Association</a>
+</div>
+
+<h2>Department</h2>
+<div id="DepartmentTableDiv"></div>
+
+<!-- office_name, postal_code -->
+
+<table class="table table-striped">
+  <legend>Department Table: </legend>
+  <thead class="thead-dark">
+ 	<tr>
+    	<th>Department ID</th>
+    	<th>Office Name</th>
+    	<th>Postal Code</th>
+    </tr>
+    </thead>
+    	{{#if results}}
+    	{{#each results}}
+    <tr>
+    	<td>{{this.id}}</td>
+        <td>{{this.office_name}}</td>
+        <td>{{this.postal_code}}</td>
+    </tr>
+    	{{/each}}
+    	{{/if}}
+</table>
+
+
+</br>
+
+
+<div id="input" class="c-input">
+	<fieldset>
+	<form id="newDepartment" action="/new_department" method="post">
+		<legend>Make a New Department here:</legend>
+		<div>
+			<label for="office_name">Dept Name: </label>
+			<input type="text" name="office_name" id="office_name" required >
+		</div>
+		<br>
+		<div>
+			<label for="postal_code">Postal Code: </label>
+			<input type="text" name="postal_code" id="postal_code" required > 
+		</div>
+		<br>
+
+		<input type="submit" id="createSubmit" value="Create new Department" class="btn btn-success c-btn">	
+	</form>
+	</fieldset>
+</div>
+</br>
+
+
+<!-- <script src="department_button.js"></script> -->

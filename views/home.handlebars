@@ -1,0 +1,110 @@
+<h1>Snow-plowing Project Company Database</h1>
+
+<div class="page_nav">
+	<a href="./"><strong>Employees</strong></a>
+	<a href="./roads">Roads</a>
+	<a href="./vehicles">Vehicles</a>
+	<a href="./department">Department</a>
+	<a href="./salary">Salary</a>
+	<a href="./association">Association</a>
+</div>
+
+
+
+<h2>Employees</h2>
+<div id="tableDiv"></div>
+
+<!-- f_name, l_name, hourly_wage -->
+
+<table class="table table-striped">
+  <legend>Employees Table: </legend>
+  <thead class="thead-dark">
+ 	<tr>
+    	<th>Employee ID</th>
+	    <th>First Name</th>
+	    <th>Last Name</th>
+	    <th>Hourly Wage ($USD)</th>
+	    <th>Assigned Vehicle Plate #</th>
+    </tr>
+    </thead>
+    	{{#if results}}
+    	{{#each results}}
+    <tr>
+    	<td>{{this.eid}}</td>
+    	<td>{{this.f_name}}</td>
+        <td>{{this.l_name}}</td>
+        <td>{{this.hourly_wage}}</td>
+        <td>{{this.car_number_fk}}</td>
+    </tr>
+    	{{/each}}
+    	{{/if}}
+</table>
+
+</br>
+
+<div id="input" class="c-input">
+	<fieldset>
+	<form id="newRoad" action="/insert_employees" method="post">
+			<legend>Enter New Employee Data here:</legend>
+		<div class="required">
+			<label for="f_name">First Name: </label>
+			<input type="text" name="f_name" id="f_name" required >
+		</div>
+		<br>
+		<div class="required">
+			<label for="l_name">Last Name: </label>
+			<input type="text" name="l_name" id="l_name" required > 
+		</div>
+		<br>
+		<div>
+			<label for="hourly_wage">Hourly Wage ($USD): </label>
+			<input type="text" name="hourly_wage" id="hourly_wage" placeholder="(Default will be 11.25)" > 
+		</div>
+		<br>
+		<div class="required">
+			<label for="Department">Assign to vehicle: </label>
+
+			<select name="car_number_fk" id="car_number_fk" required>
+        		{{#if vehicles}}
+        			<option value="">Select a vehicle plate # from here...</option>
+            	{{#each vehicles}}
+             		<option value="{{this.plate_number}}" required>{{this.plate_number}} (Type: {{this.type}})</option>
+            	{{/each}}
+        		{{/if}}
+      		</select>
+
+			<!-- <input type="text" name="car_number_fk" id="car_number_fk" required >  -->
+		</div>
+		<br>
+		<input type="submit" id="inputSubmit" value="Add Employee" class="btn btn-success c-btn">
+	</form>
+	</fieldset>
+</div>
+
+<br>
+<div id="input" class="filter-input">
+	<fieldset>
+		<form id="filterEmp" action="/filter_emp_lt_wage" method="post">
+		<legend>Filter Employees to show all employees having hourly wage LESS THAN: </legend>
+		<div>
+			<label for="hourly_wage">Earning Hourly wage less than: $</label>
+			<input type="text" name="hourly_wage_input" id="hourly_wage_input">
+		</div>
+		<br>
+		<input type="submit" id="filterSubmit" value="Click to Filter" class="btn btn-warning d-btn">
+	</form>
+	</fieldset>
+</div>
+</br>
+
+<!-- <div class="filterDiv">
+	<form>
+		<legend>Filter Employees to show all employees having hourly wage LESS THAN: </legend>
+		<label for="hourly_wage">Earning Hourly wage less than: $</label>
+		<input type="text" name="hourly_wage" id="hourly_wage" required >
+	<input type="submit" id="inputSubmit">
+	</form>	
+</div> -->
+
+
+<!-- <script src="btn.js"></script> -->

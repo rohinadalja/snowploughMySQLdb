@@ -1,0 +1,85 @@
+<h1>Snow-plowing Project Company Database</h1>
+
+<div class="page_nav">
+	<a href="./">Employees</a>
+	<a href="./roads">Roads</a>
+	<a href="./vehicles">Vehicles</a>
+	<a href="./department">Department</a>
+	<a href="./salary"><strong>Salary</strong></a>
+  <a href="./association">Association</a>
+</div>
+
+<!-- <script>
+  function todayDate(){
+    alert("loaded");
+    // document.getElementById('chq_date').valueAsDate = new Date();
+    document.getElementById('chq_date').value = "hii";
+}
+  </script> -->
+
+<h2>Salary</h2>
+<!-- 
+SELECT amount, chq_date, eid_fk FROM salary; -->
+
+<div id="SalaryTableDiv"></div>
+
+<table class="table table-striped">
+  <legend>Salary Table: </legend>
+  <thead class="thead-dark">
+    <tr>
+        <th>Chq. #</th>
+        <th>Amount (USD)</th>
+        <th>Date</th>
+        <th>Issued to (EID)</th>
+    </tr>
+    </thead>
+      {{#if results}}
+      {{#each results}}
+    <tr>
+        <td>{{this.cheque_number}}</td>
+        <td>{{this.amount}}</td>
+        <td>{{this.chq_date_formatted}}</td>
+        <td>{{this.eid_fk}}</td>
+    </tr>
+      {{/each}}
+      {{/if}}
+</table>
+
+
+</br>
+
+<div id="input" class="c-input">
+  <fieldset>
+  <form id="newSalary" action="/new_salary" method="post">
+    <legend>Log a new salary cheque:</legend>
+    <div class="required">
+      <label for="">Check Date (YYYY-MM-DD)</label>
+      <input type="text" name="chq_date" id="chq_date" placeholder="Enter date: YYYY-MM-DD">
+    </div>
+    <div class="required">
+      <label for="">Amount: $</label>
+      <input type="text" name="amount" id="amount">
+    </div>
+    <br>
+
+    <div class="required">
+      <label for="employee_id">Select an employee: </label>
+      <select name="employee_id" id="employee_id" required>
+        {{#if emp_list}}
+        <option value="">Select an employee from here...</option>
+            {{#each emp_list}}
+              <option value="{{this.eid}}" required>{{this.l_name}}, {{this.f_name}} (Employee ID: {{this.eid}})</option>
+            {{/each}}
+        {{/if}}
+      </select>
+    </div>
+    <br>
+
+    <input type="submit" id="createSubmit" value="Make new Salary Check" class="btn btn-success c-btn">  
+  </form>
+  </fieldset>
+</div>
+</br>
+
+
+<!-- <script src="salary_button.js"></script> -->
